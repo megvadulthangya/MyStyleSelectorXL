@@ -380,6 +380,91 @@
     "negative_prompt": "ugly, deformed, noisy, blurry, low contrast, color, realism, photorealistic"
   },
   {
+  "name": "1930s Pin Up Girl",
+  "prompt": "1930s pin up girl style {prompt} . vintage, elegant, chic, artistic, art deco, soft lighting, glamour, film grain, retro, fine details",
+  "negative_prompt": "modern, digital, overly sharp, deformed, blurred, noisy, amateur, overly stylized"
+  },
+  {
+  "name": "1940s Pin Up Girl",
+  "prompt": "1940s pin up girl style {prompt} . vintage, glamorous, classic Hollywood, elegant, film noir, dramatic shadows, refined, retro, soft lighting, detailed",
+  "negative_prompt": "modern, digital, overly sharp, deformed, blurred, noisy, amateur, overly stylized"
+  },
+  {
+  "name": "1950s Pin Up Girl",
+  "prompt": "1950s pin up girl style {prompt} . vintage, glamorous, classic, elegant, retro, high contrast, soft lighting, film grain, detailed, playful, pop art influences",
+  "negative_prompt": "modern, digital, overly sharp, deformed, blurred, noisy, amateur, overly stylized"
+  },
+  {
+  "name": "1960s Pin Up Girl",
+  "prompt": "1960s pin up girl style {prompt} . vintage, mod, chic, glamorous, retro, pop art influence, bold colors, high contrast, soft lighting, detailed",
+  "negative_prompt": "modern, digital, overly sharp, deformed, blurred, noisy, amateur, overly stylized"
+  },
+  {
+  "name": "1970s Pin Up Girl",
+  "prompt": "1970s pin up girl style {prompt} . vintage, disco-inspired, groovy, bold, retro, vibrant colors, glamorous, soft lighting, film grain, detailed",
+  "negative_prompt": "modern, digital, overly sharp, deformed, blurred, noisy, amateur, overly stylized"
+  },
+  {
+  "name": "1980s Pin Up Girl",
+  "prompt": "1980s pin up girl style {prompt} . vintage, neon accents, bold, glamorous, retro, high contrast, dynamic lighting, film grain, detailed, pop culture vibes",
+  "negative_prompt": "modern, digital, overly sharp, deformed, blurred, noisy, amateur, overly stylized"
+  },
+  {
+  "name": "1990s Aesthetic",
+  "prompt": "1990s aesthetic {prompt}. VHS vibes, grunge, retro fashion, neon lights, CRT screen glow, slightly washed-out colors, film grain, edgy yet nostalgic, pop culture references, streetwear, baggy jeans, flannel shirts, skateboarding, music video style",
+  "negative_prompt": "modern HD look, overly sharp, futuristic, digital artifacts, unrealistic, deformed, noisy"
+  },
+  {
+  "name": "2000s Pin-Up Aesthetic",
+  "prompt": "2000s pin-up style {prompt}. High-gloss magazine look, glamorous curls, bold red lipstick, vintage-inspired outfits with a modern twist, retro tattoos, playful expressions, sultry yet classy, vibrant colors, polished skin, burlesque influences, Bettie Page meets early 2000s fashion, pin-up poses with contemporary photography lighting",
+  "negative_prompt": "low-quality, overexposed, overly saturated, unnatural, messy, futuristic, modern streetwear"
+  },
+  {
+  "name": "Golden Era Hip-Hop Aesthetic",
+  "prompt": "90s golden era hip-hop style {prompt}. Gritty street photography, boom bap aesthetic, baggy clothes, gold chains, snapback hats, Timberland boots, urban graffiti backdrops, mixtape cover vibe, vinyl records, old-school boomboxes, breakdancing, DJs scratching vinyl, turntable setup, NYC skyline at night, dimly lit clubs, vintage film grain",
+  "negative_prompt": "modern trap fashion, mumble rap, overly polished digital look, futuristic elements, neon cyberpunk aesthetics"
+  },
+  {
+  "name": "Mortal Kombat Aesthetic",
+  "prompt": "Mortal Kombat style {prompt}. Dark and cinematic atmosphere, dramatic lighting, intense martial arts combat, masked warriors, ancient temples, mystical energy auras, battle-worn outfits, ultra-detailed textures, glowing eyes, fire and lightning effects, fatality scene composition, brutal and raw aesthetics, foggy battlefields, thunderstorm in the background",
+  "negative_prompt": "cartoonish, anime style, low-detail, soft lighting, modern superhero look, cyberpunk elements, sci-fi futuristic aesthetics"
+  },
+  {
+  "name": "Rákospalotai Women Folk Style",
+  "prompt": "Rákospalotai traditional women's folk costume, detailed embroidered blouse with floral patterns, pleated skirt with rich fabric texture, underskirts peeking from the edges, decorative apron with intricate designs, hand-embroidered lace trim, colorful shawl, lace headscarf, traditional Hungarian folk fashion, soft natural light, vibrant colors, rustic rural backdrop, cultural authenticity, vivid textile patterns, historical village ambiance, artisanal craftsmanship, high-detail fabric textures",
+  "negative_prompt": "cartoonish, anime style, low-detail, soft lighting, modern clothing elements, futuristic aesthetics, sci-fi, cyberpunk, minimalistic"
+  },
+  {
+  "name": "Rákospalotai Men Folk Style",
+  "prompt": "Rákospalotai traditional men's folk costume, embroidered vest with floral and geometric patterns, dark trousers with rich fabric texture, wide belt with metal buckle, lace-up boots, decorative handkerchief, traditional Hungarian folk fashion, woolen cap, shirt with intricate stitching, rustic rural setting, historical village atmosphere, cultural authenticity, vibrant textiles, high-detail fabric textures, natural light, earthy tones, vintage craftsmanship",
+  "negative_prompt": "cartoonish, anime style, low-detail, soft lighting, modern clothing elements, futuristic aesthetics, sci-fi, cyberpunk, minimalistic"
+  },
+  {
+  "name": "Ballet Dance Aesthetic",
+  "prompt": "Ballet dancers performing split stretches, wearing delicate tutus, lace-trimmed boyshorts, soft pastel colors, graceful poses, long flowing hair, lithe and elegant movement, soft spotlight illuminating the dancers, fine details on the tutu and lace, a graceful, ethereal atmosphere, ballet studio or stage with wooden floors, subtle lighting highlighting the elegance, fluidity and precision of the poses, serene, delicate beauty",
+  "negative_prompt": "cartoonish, anime style, low-detail, harsh lighting, modern clothing, futuristic aesthetics, oversized or bulky costumes, sci-fi, cyberpunk, minimalistic"
+  },
+  {
+  "name": "Standing Split Ballet Pose",
+  "prompt": "Ballet dancers performing a standing split stretch, legs extended in a perfect 180-degree split, one leg high against a doorframe or door, the other leg extended downward in a controlled, graceful form, wearing delicate tutus and lace-trimmed boyshorts, fluid and powerful posture, the dancer's body elegant and poised, soft lighting highlighting the strength and flexibility, elegant lines in the pose, a graceful yet intense expression on the dancer's face, focus on precision and balance, gentle spotlight on the dancer, subtle background of a ballet studio or stage with wooden floors, the doorframe or door as a subtle architectural detail",
+  "negative_prompt": "cartoonish, anime style, low-detail, harsh lighting, modern clothing, futuristic aesthetics, oversized or bulky costumes, sci-fi, cyberpunk, minimalistic"
+  },
+  {
+  "name": "Romani Girl Style",
+  "prompt": "Romani girl wearing traditional vibrant clothing, long colorful skirts, embroidered blouses, and colorful headscarves. Rich jewelry, including large earrings, rings, and bracelets, with intricate designs. The scene captures a natural outdoor setting, such as a meadow or forest, with soft sunlight. The model moves gracefully, embodying the energy of traditional dance, her skirt swirling as she dances. The colors are vivid and warm, with reds, yellows, and blues. The background features natural elements, like trees, flowers, and rustic rural buildings. The atmosphere is lively, full of culture and heritage, with a sense of freedom and vitality.",
+  "negative_prompt": "modern fashion, plain colors, minimalist style, futuristic elements, urban environments, sterile and cold atmosphere"
+  },
+  {
+  "name": "Ballet Street Fusion",
+  "prompt": "A graceful ballerina in an urban environment, blending classical ballet elegance with modern street style fashion. She wears a delicate tutu paired with edgy sneakers or high-top boots, a cropped hoodie, fishnet tights, and fingerless gloves. Her pose is dynamic and expressive, performing a grand jeté or an arabesque en pointe on a city rooftop, graffiti-covered alley, or in front of neon-lit buildings. Soft tulle contrasts with rough concrete, adding a sense of duality between delicacy and raw energy. Wind-swept hair, tattoos, and oversized streetwear elements enhance the contemporary aesthetic. The atmosphere is cinematic, moody lighting with a mix of natural golden-hour glow and urban artificial lights.",
+  "negative_prompt": "classic theater setting, overly polished fashion photography, stiff or static poses, rural backgrounds, unrealistic proportions"
+  },
+  {
+  "name": "Romani Girl Night Campfire",
+  "prompt": "Romani girl in traditional vibrant costume with intricate embroidery, flowing colorful skirt, and ornate headscarf, standing gracefully. The background features a glowing campfire and a Romani caravan with a horse-drawn carriage under a starry, nighttime sky. Warm firelight and subtle moonlight accentuate the rich textures and details of her attire, creating a mystical, atmospheric scene that evokes the heritage and spirit of traditional Romani life.",
+  "negative_prompt": "modern clothing, urban elements, bright daylight, futuristic aesthetics, minimalistic backgrounds"
+  },
+  {
     "name": "Tilt-Shift",
     "prompt": "Tilt-shift photo of {prompt} . Selective focus, miniature effect, blurred background, highly detailed, vibrant, perspective control",
     "negative_prompt": "blurry, noisy, deformed, flat, low contrast, unrealistic, oversaturated, underexposed"
