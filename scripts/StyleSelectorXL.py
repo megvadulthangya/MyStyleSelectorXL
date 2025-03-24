@@ -153,43 +153,32 @@ class StyleSelectorXL(scripts.Script):
         return [is_enabled, randomize, randomizeEach, allstyles, style]
 
     def process(self, p, is_enabled, randomize, randomizeEach, allstyles,  style):
-        if not is_enabled:
-            return
+    if not is_enabled:
+        return
 
-        if randomize:
-            style = random.choice(self.styleNames)
-        batchCount = len(p.all_prompts)
+    batchCount = len(p.all_prompts)
+    styles_to_apply =
 
-        if(batchCount == 1):
-            # for each image in batch
-            for i, prompt in enumerate(p.all_prompts):
-                positivePrompt = createPositive(style, prompt)
-                p.all_prompts[i] = positivePrompt
-            for i, prompt in enumerate(p.all_negative_prompts):
-                negativePrompt = createNegative(style, prompt)
-                p.all_negative_prompts[i] = negativePrompt
-        if(batchCount > 1):
-            styles = {}
-            for i, prompt in enumerate(p.all_prompts):
-                if(randomize):
-                    styles[i] = random.choice(self.styleNames)
-                else:
-                    styles[i] = style
-                if(allstyles):
-                    styles[i] = self.styleNames[i % len(self.styleNames)]
-            # for each image in batch
-            for i, prompt in enumerate(p.all_prompts):
-                positivePrompt = createPositive(
-                    styles[i] if randomizeEach or allstyles else styles[0], prompt)
-                p.all_prompts[i] = positivePrompt
-            for i, prompt in enumerate(p.all_negative_prompts):
-                negativePrompt = createNegative(
-                    styles[i] if randomizeEach or allstyles else styles[0], prompt)
-                p.all_negative_prompts[i] = negativePrompt
+    if allstyles:
+        styles_to_apply = self.styleNames * (batchCount // len(self.styleNames)) + self.styleNames[:batchCount % len(self.styleNames)]
+    elif randomizeEach:
+        styles_to_apply = [random.choice(self.styleNames) for _ in range(batchCount)]
+    elif randomize: # Ez a rész most csak akkor fut le, ha a randomizeEach hamis
+        chosen_style = random.choice(self.styleNames)
+        styles_to_apply = [chosen_style] * batchCount
+    else:
+        styles_to_apply = [style] * batchCount
 
-        p.extra_generation_params["Style Selector Enabled"] = True
-        p.extra_generation_params["Style Selector Randomize"] = randomize
-        p.extra_generation_params["Style Selector Style"] = style
+    for i, prompt in enumerate(p.all_prompts):
+        positivePrompt = createPositive(styles_to_apply[i], prompt)
+        p.all_prompts[i] = positivePrompt
+    for i, prompt in enumerate(p.all_negative_prompts):
+        negativePrompt = createNegative(styles_to_apply[i], prompt)
+        p.all_negative_prompts[i] = negativePrompt
+
+    p.extra_generation_params["Style Selector Enabled"] = True
+    p.extra_generation_params["Style Selector Randomize"] = randomize
+    p.extra_generation_params["Style Selector Style"] = style
 
     def after_component(self, component, **kwargs):
         # https://github.com/AUTOMATIC1111/stable-diffusion-webui/pull/7456#issuecomment-1414465888 helpfull link
