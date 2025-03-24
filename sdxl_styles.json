@@ -26,7 +26,7 @@
   },
   {
     "name": "Comic Book",
-    "prompt": "comic {prompt} . graphic illustration, comic art, graphic novel art, vibrant, highly detailed",
+    "prompt": "comic graphic illustration, comic art, graphic novel art, vibrant, highly detailed {prompt} .",
     "negative_prompt": "photograph, deformed, glitch, noisy, realistic, stock photo"
   },
   {
