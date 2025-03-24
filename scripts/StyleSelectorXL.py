@@ -1,3 +1,4 @@
+
 import contextlib
 
 import gradio as gr
@@ -11,7 +12,7 @@ stylespath = ""
 
 def get_json_content(file_path):
     try:
-        with open(file_path, 'rt', encoding="utf-8") as file:
+        with open(file_path, 'r') as file:
             json_data = json.load(file)
             return json_data
     except Exception as e:
@@ -34,7 +35,7 @@ def read_sdxl_styles(json_data):
             if 'name' in item:
                 # Append the value of 'name' to the names list
                 names.append(item['name'])
-    names.sort()
+
     return names
 
 
@@ -119,13 +120,12 @@ class StyleSelectorXL(scripts.Script):
         return scripts.AlwaysVisible
 
     def ui(self, is_img2img):
-        enabled = getattr(shared.opts, "enable_styleselector_by_default", True)
         with gr.Group():
-            with gr.Accordion("SDXL Styles", open=enabled):
+            with gr.Accordion("SDXL Styles", open=True):
                 with FormRow():
                     with FormColumn(min_width=160):
                         is_enabled = gr.Checkbox(
-                            value=enabled, label="Enable Style Selector", info="Enable Or Disable Style Selector ")
+                            value=True, label="Enable Style Selector", info="Enable Or Disable Style Selector ")
                     with FormColumn(elem_id="Randomize Style"):
                         randomize = gr.Checkbox(
                             value=False, label="Randomize Style", info="This Will Override Selected Style")
@@ -136,7 +136,7 @@ class StyleSelectorXL(scripts.Script):
                 with FormRow():
                     with FormColumn(min_width=160):
                         allstyles = gr.Checkbox(
-                            value=False, label="Generate All Styles In Order", info="To Generate Your Prompt in All Available Styles, Its Better to set batch count to " + str(len(self.styleNames)) + " ( Style Count)")
+                            value=False, label="Generate All Styles In Order", info="To Generate Your Prompt in All Available Styles, Its Better to set yout batch size to " + str(len(self.styleNames)) + " ( Style Count)")
 
                 style_ui_type = shared.opts.data.get(
                     "styles_ui",  "radio-buttons")
@@ -153,32 +153,43 @@ class StyleSelectorXL(scripts.Script):
         return [is_enabled, randomize, randomizeEach, allstyles, style]
 
     def process(self, p, is_enabled, randomize, randomizeEach, allstyles,  style):
-    if not is_enabled:
-        return
+        if not is_enabled:
+            return
 
-    batchCount = len(p.all_prompts)
-    styles_to_apply =
+        if randomize:
+            style = random.choice(self.styleNames)
+        batchCount = len(p.all_prompts)
 
-    if allstyles:
-        styles_to_apply = self.styleNames * (batchCount // len(self.styleNames)) + self.styleNames[:batchCount % len(self.styleNames)]
-    elif randomizeEach:
-        styles_to_apply = [random.choice(self.styleNames) for _ in range(batchCount)]
-    elif randomize: # Ez a rész most csak akkor fut le, ha a randomizeEach hamis
-        chosen_style = random.choice(self.styleNames)
-        styles_to_apply = [chosen_style] * batchCount
-    else:
-        styles_to_apply = [style] * batchCount
+        if(batchCount == 1):
+            # for each image in batch
+            for i, prompt in enumerate(p.all_prompts):
+                positivePrompt = createPositive(style, prompt)
+                p.all_prompts[i] = positivePrompt
+            for i, prompt in enumerate(p.all_negative_prompts):
+                negativePrompt = createNegative(style, prompt)
+                p.all_negative_prompts[i] = negativePrompt
+        if(batchCount > 1):
+            styles = {}
+            for i, prompt in enumerate(p.all_prompts):
+                if(randomize):
+                    styles[i] = random.choice(self.styleNames)
+                else:
+                    styles[i] = style
+                if(allstyles):
+                    styles[i] = self.styleNames[i % len(self.styleNames)]
+            # for each image in batch
+            for i, prompt in enumerate(p.all_prompts):
+                positivePrompt = createPositive(
+                    styles[i] if randomizeEach or allstyles else styles[0], prompt)
+                p.all_prompts[i] = positivePrompt
+            for i, prompt in enumerate(p.all_negative_prompts):
+                negativePrompt = createNegative(
+                    styles[i] if randomizeEach or allstyles else styles[0], prompt)
+                p.all_negative_prompts[i] = negativePrompt
 
-    for i, prompt in enumerate(p.all_prompts):
-        positivePrompt = createPositive(styles_to_apply[i], prompt)
-        p.all_prompts[i] = positivePrompt
-    for i, prompt in enumerate(p.all_negative_prompts):
-        negativePrompt = createNegative(styles_to_apply[i], prompt)
-        p.all_negative_prompts[i] = negativePrompt
-
-    p.extra_generation_params["Style Selector Enabled"] = True
-    p.extra_generation_params["Style Selector Randomize"] = randomize
-    p.extra_generation_params["Style Selector Style"] = style
+        p.extra_generation_params["Style Selector Enabled"] = True
+        p.extra_generation_params["Style Selector Randomize"] = randomize
+        p.extra_generation_params["Style Selector Style"] = style
 
     def after_component(self, component, **kwargs):
         # https://github.com/AUTOMATIC1111/stable-diffusion-webui/pull/7456#issuecomment-1414465888 helpfull link
@@ -203,13 +214,5 @@ def on_ui_settings():
     shared.opts.add_option("styles_ui", shared.OptionInfo(
         "radio-buttons", "How should Style Names Rendered on UI", gr.Radio, {"choices": ["radio-buttons", "select-list"]}, section=section))
 
-    shared.opts.add_option(
-        "enable_styleselector_by_default",
-        shared.OptionInfo(
-            True,
-            "enable Style Selector by default",
-            gr.Checkbox,
-            section=section
-            )
-    )
+
 script_callbacks.on_ui_settings(on_ui_settings)
