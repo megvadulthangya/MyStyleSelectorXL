@@ -109,8 +109,7 @@ def createNegative(style, negative):
 class StyleSelectorXL(scripts.Script):
     def __init__(self) -> None:
         super().__init__()
-
-    styleNames = getStyles()
+        styleNames = getStyles()
 
     def title(self):
         return "Style Selector for SDXL 1.0"
