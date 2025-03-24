@@ -178,14 +178,25 @@ class StyleSelectorXL(scripts.Script):
                 if(allstyles):
                     styles[i] = self.styleNames[i % len(self.styleNames)]
             # for each image in batch
+
             for i, prompt in enumerate(p.all_prompts):
-                positivePrompt = createPositive(
-                    styles[i] if randomizeEach or allstyles else styles[0], prompt)
+                selected_style = random.choice(self.styleNames) if randomizeEach else styles[i]
+                positivePrompt = createPositive(selected_style, prompt)
                 p.all_prompts[i] = positivePrompt
+
             for i, prompt in enumerate(p.all_negative_prompts):
-                negativePrompt = createNegative(
-                    styles[i] if randomizeEach or allstyles else styles[0], prompt)
+                selected_style = random.choice(self.styleNames) if randomizeEach else styles[i]
+                negativePrompt = createNegative(selected_style, prompt)
                 p.all_negative_prompts[i] = negativePrompt
+            
+#            for i, prompt in enumerate(p.all_prompts):
+#                positivePrompt = createPositive(
+#                    styles[i] if randomizeEach or allstyles else styles[0], prompt)
+#                p.all_prompts[i] = positivePrompt
+#            for i, prompt in enumerate(p.all_negative_prompts):
+#                negativePrompt = createNegative(
+#                    styles[i] if randomizeEach or allstyles else styles[0], prompt)
+#                p.all_negative_prompts[i] = negativePrompt
 
         p.extra_generation_params["Style Selector Enabled"] = True
         p.extra_generation_params["Style Selector Randomize"] = randomize
