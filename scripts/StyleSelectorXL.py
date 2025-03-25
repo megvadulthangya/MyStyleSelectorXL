@@ -152,34 +152,45 @@ class StyleSelectorXL(scripts.Script):
 
         return [is_enabled, randomize, randomizeEach, allstyles, style]
 
-        def process(self, p, is_enabled, randomize, randomizeEach, allstyles,  style):
-         if not is_enabled:
+    def process(self, p, is_enabled, randomize, randomizeEach, allstyles,  style):
+        if not is_enabled:
             return
 
-        styles = {}
+        if randomize:
+            style = random.choice(self.styleNames)
         batchCount = len(p.all_prompts)
 
-        # Stílusok kiosztása
-        for i in range(batchCount):
-            if allstyles:
-                styles[i] = self.styleNames[i % len(self.styleNames)]  # Ciklikus stílusváltás
-            elif randomizeEach:
-                styles[i] = random.choice(self.styleNames)
-            elif randomize:
-                styles[i] = random.choice(self.styleNames)  # Globális random felülírja az eredeti "style"-t
-            else:
-                styles[i] = style  # Alapértelmezett
+        if(batchCount == 1):
+            # for each image in batch
+            for i, prompt in enumerate(p.all_prompts):
+                positivePrompt = createPositive(style, prompt)
+                p.all_prompts[i] = positivePrompt
+            for i, prompt in enumerate(p.all_negative_prompts):
+                negativePrompt = createNegative(style, prompt)
+                p.all_negative_prompts[i] = negativePrompt
+        if(batchCount > 1):
+            styles = {}
+            for i, prompt in enumerate(p.all_prompts):
+                if(randomize):
+                    styles[i] = random.choice(self.styleNames)
+                else:
+                    styles[i] = style
+                if(allstyles):
+                    styles[i] = self.styleNames[i % len(self.styleNames)]
+            # for each image in batch
+            for i, prompt in enumerate(p.all_prompts):
+                positivePrompt = createPositive(
+                    styles[i] if randomizeEach or allstyles else styles[0], prompt)
+                p.all_prompts[i] = positivePrompt
+            for i, prompt in enumerate(p.all_negative_prompts):
+                negativePrompt = createNegative(
+                    styles[i] if randomizeEach or allstyles else styles[0], prompt)
+                p.all_negative_prompts[i] = negativePrompt
 
-        # Promptok frissítése
-        for i, prompt in enumerate(p.all_prompts):
-            p.all_prompts[i] = createPositive(styles[i], prompt)
-        for i, prompt in enumerate(p.all_negative_prompts):
-            p.all_negative_prompts[i] = createNegative(styles[i], prompt)
-
-        # Metaadatok frissítése
         p.extra_generation_params["Style Selector Enabled"] = True
-        p.extra_generation_params["Style Selector Randomize"] = randomize or randomizeEach
-        p.extra_generation_params["Style Selector Style"] = "Multiple" if (randomizeEach or allstyles) else style
+        p.extra_generation_params["Style Selector Randomize"] = randomize
+        p.extra_generation_params["Style Selector Style"] = style
+
     def after_component(self, component, **kwargs):
         # https://github.com/AUTOMATIC1111/stable-diffusion-webui/pull/7456#issuecomment-1414465888 helpfull link
         # Find the text2img textbox component
