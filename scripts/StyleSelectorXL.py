@@ -153,7 +153,7 @@ class StyleSelectorXL(scripts.Script):
         return [is_enabled, randomize, randomizeEach, allstyles, style]
 
         def process(self, p, is_enabled, randomize, randomizeEach, allstyles,  style):
-        if not is_enabled:
+         if not is_enabled:
             return
 
         styles = {}
