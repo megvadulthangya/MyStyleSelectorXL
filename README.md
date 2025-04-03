@@ -11,7 +11,7 @@ Released positive and negative templates are used to generate stylized prompts. 
 
 Enter this repo's URL in Automatic1111's extension tab "Install from Url":
 
-https://github.com/ahgsql/StyleSelectorXL.git
+https://github.com/megvadulthangya/MyStyleSelectorXL.git
 
 ### Usage
 
