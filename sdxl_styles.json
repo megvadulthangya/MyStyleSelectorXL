@@ -5,6 +5,11 @@
     "negative_prompt": ""
   },
   {
+    "name": "Generic",
+    "prompt": "breathtaking {prompt} . award-winning, professional, highly detailed",
+    "negative_prompt": "anime, cartoon, graphic, text, painting, crayon, graphite, abstract glitch, blurry"
+  },
+  {
     "name": "3D Model",
     "prompt": "professional 3d model {prompt} . octane render, highly detailed, volumetric, dramatic lighting",
     "negative_prompt": "ugly, deformed, noisy, low poly, blurry, painting"
